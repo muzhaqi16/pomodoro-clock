@@ -3,7 +3,7 @@ import './DisplayTimer.css';
 
 function DisplayTimer(props) {
     const [minutes, setMinutes] = useState(0);
-    const [seconds, setSeconds] = useState(4);
+    const [seconds, setSeconds] = useState(0);
 
     const updateTime = () => {
         setSeconds(prevState => {
@@ -16,6 +16,7 @@ function DisplayTimer(props) {
     }
     useEffect(() => {
         setMinutes(props.time)
+        setSeconds(0);
         var interval;
         if (props.status) {
             interval = setInterval(() => {
@@ -27,7 +28,7 @@ function DisplayTimer(props) {
     }, [props]);
     return (
         <div>
-            <span id="timer" className="timer">{minutes} : {seconds}</span>
+            <span id="time-left" className="timer">{minutes} : {seconds}</span>
         </div>
     )
 }

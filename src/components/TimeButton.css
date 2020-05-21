@@ -1,3 +1,9 @@
+.button-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
 .round-button-time {
     min-height: 150px;
     color: #64B5F6;
@@ -21,4 +27,9 @@
 .box {
     font-size: 2rem;
 
+}
+
+.label {
+    margin-top: 20px;
+    font-size: 1.5rem;
 }

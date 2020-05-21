@@ -8,14 +8,14 @@ function App() {
   const [worktime, setWorktime] = useState(25);
   const [breaktime, setBreaktime] = useState(5);
   const [isActive, setIsActive] = useState(false);
-  console.log(worktime, breaktime, isActive)
+
   return (
     <div className="main-container">
       <DisplayTimer time={worktime} status={isActive} />
       <div className="handler-buttons">
-        <TimeButton type="timer" minutes={worktime} onClick={setWorktime} />
-        <TimeButton type="text" text="start" onClick={setIsActive} />
-        <TimeButton type="timer" minutes={breaktime} onClick={setBreaktime} />
+        <TimeButton data={{ type: "timer", lengthID: "session-length", label: "Session Length", id: "session-label", dec: "session-decrement", inc: "session-increment" }} minutes={worktime} onClick={setWorktime} />
+        <TimeButton data={{ type: "text", label: "", id: "timer-label" }} status={isActive} text="start" onClick={setIsActive} />
+        <TimeButton data={{ type: "timer", lengthID: "break-length", label: "Break Length", id: "break-label", dec: "break-decrement", inc: "break-increment" }} minutes={breaktime} onClick={setBreaktime} />
       </div>
     </div>
   );

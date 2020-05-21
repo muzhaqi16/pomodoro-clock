@@ -1,20 +1,24 @@
 .round-button-time {
-    background-color: #64B5F6;
     min-height: 150px;
+    color: #64B5F6;
     border-radius: 50%;
     width: 150px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: 2px solid #a8d8ff;
+    border: 2px solid #64B5F6;
     cursor: pointer;
     margin-right: 20px;
+    transition: all 0.2s ease-in-out;
 }
 
 .round-button-time:hover {
     background-color: #2196F3;
+    border-color: white;
+    color: white;
 }
 
 .box {
     font-size: 2rem;
+
 }

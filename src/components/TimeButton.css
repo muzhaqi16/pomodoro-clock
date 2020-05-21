@@ -1,0 +1,20 @@
+.round-button-time {
+    background-color: #64B5F6;
+    min-height: 150px;
+    border-radius: 50%;
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid #a8d8ff;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.round-button-time:hover {
+    background-color: #2196F3;
+}
+
+.box {
+    font-size: 2rem;
+}

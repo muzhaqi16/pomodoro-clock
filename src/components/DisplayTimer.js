@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './DisplayTimer.css';
 
 function DisplayTimer(props) {
@@ -8,15 +8,14 @@ function DisplayTimer(props) {
 
     const [seconds, setSeconds] = useState(0);
     const [intervalId, setIntervalId] = useState(null);
-
+    const intervalRef = useRef(intervalId);
     const updateTime = () => {
 
         setSeconds(prevSeconds => {
             if (prevSeconds === 0) {
                 setMinutes(prevMinutes => {
                     if (prevMinutes === 0) {
-                        clearInterval(intervalId);
-                        console.log("This should stop");
+                        clearInterval(intervalRef.current);
                         return 0;
                     }
                     return prevMinutes - 1
@@ -32,6 +31,8 @@ function DisplayTimer(props) {
                 updateTime();
             }, 1000);
             setIntervalId(interval);
+            intervalRef.current = interval;
+            console.log(interval);
         } else {
             clearInterval(intervalId);
         }

@@ -5,7 +5,7 @@ import TimeButton from './components/TimeButton';
 import './App.css';
 
 function App() {
-  const [worktime, setWorktime] = useState(1);
+  const [worktime, setWorktime] = useState(25);
   const [breaktime, setBreaktime] = useState(5);
   const [isActive, setIsActive] = useState(false);
 
@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="main-container">
       <button id="reset" onClick={reset}>Reset</button>
-      <DisplayTimer time={worktime} status={isActive} />
+      <DisplayTimer time={worktime} break={breaktime} status={isActive} />
       <div className="handler-buttons">
 
         {/* Session length button */}

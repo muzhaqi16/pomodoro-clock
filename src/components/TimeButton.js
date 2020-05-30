@@ -12,7 +12,7 @@ function TimeButton(props) {
                 props.onClick(props.minutes - 1)
             }
         } else if (clicked === '+') {
-            if (props.minutes < 59) {
+            if (props.minutes < 60) {
                 props.onClick(props.minutes + 1)
             }
         } else {

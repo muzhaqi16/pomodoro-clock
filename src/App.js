@@ -10,9 +10,9 @@ function App() {
   const [isActive, setIsActive] = useState(false);
 
   const reset = () => {
-    console.log("Reseting now");
     setWorktime(25);
     setIsActive(false);
+    setBreaktime(5)
   }
 
   return (

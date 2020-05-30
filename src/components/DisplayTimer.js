@@ -9,20 +9,28 @@ function DisplayTimer(props) {
     const [seconds, setSeconds] = useState(0);
     const [intervalId, setIntervalId] = useState(null);
     const intervalRef = useRef(intervalId);
-    const updateTime = () => {
+    const minutesRef = useRef(minutes);
 
-        setSeconds(prevSeconds => {
-            if (prevSeconds === 0) {
-                setMinutes(prevMinutes => {
+    const updateTime = () => {
+        setSeconds((seconds) => {
+            console.log("Seconds", seconds)
+            if (seconds === 0) {
+                setMinutes((prevMinutes) => {
+                    minutesRef.current = prevMinutes;
                     if (prevMinutes === 0) {
                         clearInterval(intervalRef.current);
                         return 0;
                     }
                     return prevMinutes - 1
                 });
+                console.log(minutesRef);
+                if (minutesRef.current === 0) {
+                    return 0;
+                }
                 return 59;
+
             }
-            return prevSeconds - 1;
+            return seconds - 1;
         })
     }
     useEffect(() => {
@@ -32,14 +40,11 @@ function DisplayTimer(props) {
             }, 1000);
             setIntervalId(interval);
             intervalRef.current = interval;
-            console.log(interval);
-        } else {
-            clearInterval(intervalId);
         }
+        return () => clearInterval(intervalRef.current);
     }, [props.status]);
 
     useEffect(() => {
-        console.log("I changed too")
         setMinutes(props.time);
         setSeconds(0);
     }, [props.time]);

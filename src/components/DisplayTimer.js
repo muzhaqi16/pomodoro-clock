@@ -5,6 +5,7 @@ function DisplayTimer(props) {
     const [minutes, setMinutes] = useState(() =>
         props.time
     );
+    const audio = document.getElementById("beep");
     const timerSpeed = 100;
     const [seconds, setSeconds] = useState(0);
     const [intervalId, setIntervalId] = useState(null);
@@ -15,11 +16,9 @@ function DisplayTimer(props) {
             setMinutes(() => props.break);
             setIntervalId((prevId) => {
                 clearInterval(prevId);
-                console.log("Clearing interval id : ", prevId);
                 let interval = setInterval(() => {
                     updateTime();
                 }, timerSpeed);
-                console.log("Setting interval id : ", interval);
                 return interval;
             });
             setSession((prevSession) => !prevSession);
@@ -28,11 +27,9 @@ function DisplayTimer(props) {
             setMinutes(() => props.time);
             setIntervalId((prevId) => {
                 clearInterval(prevId);
-                console.log("Clearing interval id : ", prevId);
                 let interval = setInterval(() => {
                     updateTime();
                 }, timerSpeed);
-                console.log("Setting interval id : ", interval);
                 return interval;
             });
             setSession((prevSession) => !prevSession)
@@ -44,6 +41,7 @@ function DisplayTimer(props) {
                 setMinutes((prevMinutes) => {
                     if (prevMinutes === 0) {
                         changeTimer();
+                        playAudio();
                         return 0;
                     }
                     return prevMinutes - 1
@@ -53,6 +51,12 @@ function DisplayTimer(props) {
             }
             return seconds - 1;
         })
+    }
+    const playAudio = () => {
+        if (audio) {
+            audio.currentTime = 0;
+            audio.play();
+        }
     }
     useEffect(() => {
         if (props.status) {
@@ -67,6 +71,10 @@ function DisplayTimer(props) {
     useEffect(() => {
         setMinutes(props.time);
         setSeconds(0);// <-- Changes this to 0 when ready for deployment
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
     }, [props.time]);
     return (
         <div>
@@ -74,6 +82,11 @@ function DisplayTimer(props) {
             <span id="time-left" className="timer">
                 {minutes < 10 ? "0" + minutes : minutes}:{seconds < 10 ? "0" + seconds : seconds}
             </span>
+            <audio id="beep"
+                src={require("../assets/sound.wav")}>
+                Your browser does not support the
+                    <code>audio</code> element.
+                </audio>
         </div>
     )
 }

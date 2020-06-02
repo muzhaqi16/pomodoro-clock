@@ -5,12 +5,12 @@ import TimeButton from './components/TimeButton';
 import './App.css';
 
 function App() {
-  const [worktime, setWorktime] = useState(2);// <-- Changes this to 25 when ready for deployment
+  const [worktime, setWorktime] = useState(25);// <-- Changes this to 25 when ready for deployment
   const [breaktime, setBreaktime] = useState(5);// <-- Changes this to 5 when ready for deployment
   const [isActive, setIsActive] = useState(false);
 
   const reset = () => {
-    setWorktime(25);
+    setWorktime(() => 25);
     setIsActive(false);
     setBreaktime(5)
   }

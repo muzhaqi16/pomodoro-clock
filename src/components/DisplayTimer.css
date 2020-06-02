@@ -1,6 +1,7 @@
 .timer {
   font-size: 15rem;
   font-weight: 100;
+  user-select: none;
 }
 .timer-display {
   display: flex;

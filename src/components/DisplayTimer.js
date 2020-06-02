@@ -1,45 +1,53 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import './DisplayTimer.css';
 
 function DisplayTimer(props) {
     const [minutes, setMinutes] = useState(() =>
         props.time
     );
-
+    const timerSpeed = 100;
     const [seconds, setSeconds] = useState(0);
     const [intervalId, setIntervalId] = useState(null);
-    const intervalRef = useRef(intervalId);
-    const minutesRef = useRef(minutes);
     const [session, setSession] = useState(true)
-    const sessionRef = useRef(session)
+
     const changeTimer = () => {
+        if (session) {
+            setMinutes(() => props.break);
+            setIntervalId((prevId) => {
+                clearInterval(prevId);
+                console.log("Clearing interval id : ", prevId);
+                let interval = setInterval(() => {
+                    updateTime();
+                }, timerSpeed);
+                console.log("Setting interval id : ", interval);
+                return interval;
+            });
+            setSession((prevSession) => !prevSession);
 
-        if (sessionRef.current) {
-            setMinutes(props.break);
-            let interval = setInterval(() => {
-                updateTime();
-            }, 1000);
-            setIntervalId(interval);
-            intervalRef.current = interval;
-            setSession(false);
+        } else {
+            setMinutes(() => props.time);
+            setIntervalId((prevId) => {
+                clearInterval(prevId);
+                console.log("Clearing interval id : ", prevId);
+                let interval = setInterval(() => {
+                    updateTime();
+                }, timerSpeed);
+                console.log("Setting interval id : ", interval);
+                return interval;
+            });
+            setSession((prevSession) => !prevSession)
         }
-
     }
     const updateTime = () => {
         setSeconds((seconds) => {
             if (seconds === 0) {
                 setMinutes((prevMinutes) => {
-                    minutesRef.current = prevMinutes;
                     if (prevMinutes === 0) {
-                        clearInterval(intervalRef.current);
                         changeTimer();
                         return 0;
                     }
                     return prevMinutes - 1
                 });
-                if (minutesRef.current === 0) {
-                    return 0;
-                }
                 return 59;
 
             }
@@ -50,16 +58,15 @@ function DisplayTimer(props) {
         if (props.status) {
             let interval = setInterval(() => {
                 updateTime();
-            }, 1000);
+            }, timerSpeed);
             setIntervalId(interval);
-            intervalRef.current = interval;
         }
-        return () => clearInterval(intervalRef.current);
+        return clearInterval(intervalId);
     }, [props.status]);
 
     useEffect(() => {
         setMinutes(props.time);
-        setSeconds(0);
+        setSeconds(0);// <-- Changes this to 0 when ready for deployment
     }, [props.time]);
     return (
         <div>

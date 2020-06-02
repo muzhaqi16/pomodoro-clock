@@ -10,15 +10,15 @@ function App() {
   const [isActive, setIsActive] = useState(false);
 
   const reset = () => {
-    setWorktime(() => 25);
     setIsActive(false);
-    setBreaktime(5)
+    setWorktime(25);
+    setBreaktime(5);
   }
 
   return (
     <div className="main-container">
-      <button id="reset" onClick={reset}>Reset</button>
-      <DisplayTimer time={worktime} break={breaktime} status={isActive} />
+      <h1>Pomodoro Clock</h1>
+      <DisplayTimer time={worktime} break={breaktime} status={isActive} reset={reset} />
       <div className="handler-buttons">
 
         {/* Session length button */}

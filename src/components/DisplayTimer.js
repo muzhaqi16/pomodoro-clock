@@ -6,7 +6,7 @@ function DisplayTimer(props) {
         props.time
     );
     const audio = document.getElementById("beep");
-    const timerSpeed = 100;
+    const timerSpeed = 1000;
     const [seconds, setSeconds] = useState(0);
     const [intervalId, setIntervalId] = useState(null);
     const [session, setSession] = useState(true)
@@ -54,10 +54,10 @@ function DisplayTimer(props) {
     }
     const playAudio = () => {
         if (audio) {
-            audio.currentTime = 0;
             audio.play();
         }
     }
+
     useEffect(() => {
         if (props.status) {
             let interval = setInterval(() => {
@@ -66,19 +66,28 @@ function DisplayTimer(props) {
             setIntervalId(interval);
         }
         return clearInterval(intervalId);
+        // eslint-disable-next-line
     }, [props.status]);
 
     useEffect(() => {
         setMinutes(props.time);
         setSeconds(0);// <-- Changes this to 0 when ready for deployment
+    }, [props.time]);
+    const resetTime = () => {
+        setMinutes(props.time);
+        setSeconds(0);
+        clearInterval(intervalId);
+        props.reset();
         if (audio) {
             audio.pause();
             audio.currentTime = 0;
         }
-    }, [props.time]);
+        setSession(true);
+    }
     return (
-        <div>
-            <h1 id="timer-label">{session ? "Session" : "Break"}</h1>
+        <div className="timer-display">
+
+            <h2 id="timer-label">{session ? "Session" : "Break"}</h2>
             <span id="time-left" className="timer">
                 {minutes < 10 ? "0" + minutes : minutes}:{seconds < 10 ? "0" + seconds : seconds}
             </span>
@@ -87,6 +96,7 @@ function DisplayTimer(props) {
                 Your browser does not support the
                     <code>audio</code> element.
                 </audio>
+            <button id="reset" onClick={resetTime}>Reset</button>
         </div>
     )
 }

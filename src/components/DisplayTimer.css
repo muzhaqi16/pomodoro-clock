@@ -22,3 +22,19 @@
 #timer-label {
   font-size: 2rem;
 }
+@media (max-width: 768px) {
+  .timer {
+    font-size: 10rem;
+  }
+  #reset {
+    margin: 40px 0;
+  }
+}
+@media (max-width: 480px) {
+  .timer {
+    font-size: 8rem;
+  }
+  #reset {
+    margin: 20px 0;
+  }
+}

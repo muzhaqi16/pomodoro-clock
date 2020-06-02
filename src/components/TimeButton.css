@@ -1,35 +1,54 @@
 .button-container {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .round-button-time {
-    min-height: 150px;
-    color: #64B5F6;
-    border-radius: 50%;
-    width: 150px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border: 2px solid #64B5F6;
-    cursor: pointer;
-    margin-right: 20px;
-    transition: all 0.2s ease-in-out;
+  min-height: 150px;
+  color: #64b5f6;
+  border-radius: 50%;
+  width: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px solid #64b5f6;
+  cursor: pointer;
+  margin-right: 20px;
+  transition: all 0.2s ease-in-out;
 }
 
 .round-button-time:hover {
-    background-color: #2196F3;
-    border-color: white;
-    color: white;
+  background-color: #2196f3;
+  border-color: white;
+  color: white;
 }
 
 .box {
-    font-size: 2rem;
-
+  font-size: 2rem;
 }
 
 .label {
-    margin-top: 20px;
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+@media (max-width: 768px) and (orientation: portrait) {
+  .round-button-time {
+    min-height: 125px;
+    height: 125px;
+    width: 125px;
+  }
+  .label {
     font-size: 1.5rem;
+  }
+}
+@media (max-width: 480px) and (orientation: portrait) {
+  .round-button-time {
+    min-height: 100px;
+    height: 100px;
+    width: 100px;
+  }
+  .label {
+    font-size: 1rem;
+  }
 }
